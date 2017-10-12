@@ -7,6 +7,11 @@
 CONFIG_PATH=/etc/apache2/httpd.conf
 DOCUMENT_ROOT=/var/www/localhost/htdocs
 
+if [[ ! -z ${APACHE_SERVER_NAME} ]]
+then
+    sed -i "s/ServerName localhost/ServerName ${APACHE_SERVER_NAME}/" ${CONFIG_PATH}
+fi
+
 if [[ ! -z ${APACHE_RUN_USER} ]]
 then
 
