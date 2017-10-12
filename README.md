@@ -29,3 +29,9 @@ To use this start the container on port 8080 with:
 ```
 docker run -d --name apache -p 8080:80 -v /path/to/localhost:/var/www/localhost kalicki2k/alpine-apache
 ```
+
+Or with environments:
+
+```
+docker run -d --name apache -p 8080:80 -e APACHE_RUN_USER=web1 -e APACHE_RUN_GROUP=web -e APACHE_SERVER_NAME=localhost kalicki2k/alpine-apache
+```
