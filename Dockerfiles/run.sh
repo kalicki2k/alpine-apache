@@ -27,7 +27,7 @@ then
     if [[ ! -z ${APACHE_RUN_USER_ID} ]] && [[ ! -z ${APACHE_RUN_GROUP_ID} ]]
     then
         addgroup -g ${APACHE_RUN_GROUP_ID} ${APACHE_RUN_GROUP}
-        adduser -u ${APACHE_RUN_USER_ID} -G ${APACHE_RUN_GROUP_ID} -h ${DOCUMENT_ROOT} ${APACHE_RUN_USER}
+        adduser -u ${APACHE_RUN_USER_ID} -G ${APACHE_RUN_GROUP} -h ${DOCUMENT_ROOT} ${APACHE_RUN_USER}
 
     else
         addgroup ${APACHE_RUN_GROUP}
