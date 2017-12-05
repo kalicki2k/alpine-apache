@@ -7,11 +7,17 @@
 CONFIG_PATH=/etc/apache2/httpd.conf
 DOCUMENT_ROOT=/var/www/localhost/htdocs
 
+#
+# Set server name
+#
 if [[ ! -z ${APACHE_SERVER_NAME} ]]
 then
     sed -i "s/ServerName localhost/ServerName ${APACHE_SERVER_NAME}/" ${CONFIG_PATH}
 fi
 
+#
+# Create user and group
+#
 if [[ ! -z ${APACHE_RUN_USER} ]]
 then
 
@@ -36,7 +42,6 @@ then
 
     chown -R ${APACHE_RUN_USER}:${APACHE_RUN_GROUP} ${DOCUMENT_ROOT}
 fi
-
 
 #
 # Make sure we're not confused by old, incompletely-shutdown httpd context after restarting the container.
