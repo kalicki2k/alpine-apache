@@ -8,6 +8,8 @@ CGI_PATH=/var/www/localhost/cgi-bin
 CONFIG_PATH=/etc/apache2/httpd.conf
 DOCUMENT_ROOT=/var/www/localhost/htdocs
 LOGS_PATH=/var/www/localhost/logs
+INTERNAL_PATH=/var/www/localhost/internal
+INTERNAL_SKEL_PATH=/var/www/skel/internal
 
 #
 # Checks if required folder exists. If not, it will be created.
@@ -25,6 +27,14 @@ fi
 if [[ ! -d ${LOGS_PATH} ]]
 then
     mkdir ${LOGS_PATH}
+fi
+
+#
+#
+#
+if [[ ! -d ${INTERNAL_PATH} ]]
+then
+    cp -r ${INTERNAL_SKEL_PATH} ${INTERNAL_PATH}
 fi
 
 #
