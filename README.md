@@ -11,6 +11,7 @@ The image exposes a volume at `/var/www/localhost`. The structure is:
 | /var/www/localhost/htdocs  | web root       |
 | /var/www/localhost/cgi-bin | cgi bin folder |
 | /var/www/localhost/logs    | log folder     | 
+| /var/www/localhost/error   | error pages    | 
 
 ## Environment variables
 Various env vars can be set at runtime via your docker command or docker-compose environment section.
