@@ -6,11 +6,11 @@ To access site contents from outside the container you should map /var/www/local
 ## Static folders
 The image exposes a volume at `/var/www/localhost`. The structure is:
 
-| Directory                  | Description          |
-| -------------------------- | -------------------- |
-| /var/www/localhost/htdocs  | web root             |
-| /var/www/localhost/cgi-bin | cgi bin folder       |
-| /var/www/localhost/logs    | apache log directory | 
+| Directory                  | Description    |
+| -------------------------- | -------------- |
+| /var/www/localhost/htdocs  | web root       |
+| /var/www/localhost/cgi-bin | cgi bin folder |
+| /var/www/localhost/logs    | log folder     | 
 
 ## Environment variables
 Various env vars can be set at runtime via your docker command or docker-compose environment section.
