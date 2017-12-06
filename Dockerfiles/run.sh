@@ -7,6 +7,7 @@
 CGI_PATH=/var/www/localhost/cgi-bin
 CONFIG_PATH=/etc/apache2/httpd.conf
 DOCUMENT_ROOT=/var/www/localhost/htdocs
+DOCUMENT_SKEL_ROOT=/var/www/skel/htdocs
 LOGS_PATH=/var/www/localhost/logs
 ERROR_PATH=/var/www/localhost/error
 ERROR_SKEL_PATH=/var/www/skel/error
@@ -21,12 +22,22 @@ fi
 
 if [[ ! -d ${DOCUMENT_ROOT} ]]
 then
-    mkdir ${DOCUMENT_ROOT}
+    cp -r ${DOCUMENT_SKEL_ROOT} ${DOCUMENT_ROOT}
 fi
 
 if [[ ! -d ${LOGS_PATH} ]]
 then
     mkdir ${LOGS_PATH}
+fi
+
+#
+# Remove default page
+#
+STR1='<html><body><h1>It works!</h1></body></html>'
+STR2=$(cat /var/www/localhost/htdocs/index.html)
+if [ "$STR1" == "$STR2" ]
+then
+    cp ${DOCUMENT_SKEL_ROOT}/index.html ${DOCUMENT_ROOT}/index.html
 fi
 
 #
