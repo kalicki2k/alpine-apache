@@ -16,8 +16,8 @@ The image exposes a volume at `/var/www/localhost`. The structure is:
 ## Environment variables
 Various env vars can be set at runtime via your docker command or docker-compose environment section.
 
-| Name                | Description                 |
-| ------------------- | --------------------------- |
+| Name                | Description                                          |
+| ------------------- | ---------------------------------------------------- |
 | APACHE_SERVER_NAME  | Server name that the server uses to identify itself. |
 | APACHE_RUN_USER     | User name to run httpd as.                           |
 | APACHE_RUN_USER_ID  | User ID to run httpd as.                             |
