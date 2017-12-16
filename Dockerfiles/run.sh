@@ -30,6 +30,11 @@ then
     mkdir ${LOGS_PATH}
 fi
 
+if [[ ! -d ${ERROR_PATH} ]]
+then
+    cp -r ${ERROR_SKEL_PATH} ${ERROR_PATH}
+fi
+
 #
 # Remove default page
 #
@@ -38,14 +43,6 @@ STR2=$(cat /var/www/localhost/htdocs/index.html)
 if [ "$STR1" == "$STR2" ]
 then
     cp ${DOCUMENT_SKEL_ROOT}/index.html ${DOCUMENT_ROOT}/index.html
-fi
-
-#
-#
-#
-if [[ ! -d ${ERROR_PATH} ]]
-then
-    cp -r ${ERROR_SKEL_PATH} ${ERROR_PATH}
 fi
 
 #
