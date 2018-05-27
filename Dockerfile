@@ -5,7 +5,7 @@ MAINTAINER Sebastian Kalicki (https://github.com/kalicki2k)
 COPY Dockerfiles/. /
 
 RUN apk update && apk upgrade && \
-    apk add apache2 && \
+    apk add apache2 apache2-ssl && \
     mkdir /run/apache2/ && \
     mkdir /var/www/localhost/logs && \
     chmod +x /run.sh && \
