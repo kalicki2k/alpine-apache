@@ -37,5 +37,13 @@ docker run -d --name apache -p 8080:80 -v /path/to/localhost:/var/www/localhost 
 Or with environments:
 
 ```
-docker run -d --name apache -p 8080:80 -e APACHE_RUN_USER=web1 -e APACHE_RUN_GROUP=web -e APACHE_SERVER_NAME=localhost kalicki2k/alpine-apache
+docker run -d --name apache -p 8000:80 -p 8001:443  \
+           -v /path/to/localhost:/var/www/localhost \
+           -v /etc/letsencrypt:/etc/letsencrypt \
+           -e APACHE_RUN_USER=web \
+           -e APACHE_RUN_GROUP=web \
+           -e APACHE_SERVER_NAME=kmedia.rocks \
+           -e APACHE_SSL_CERTIFICATE=/etc/letsencrypt/live/kmedia.rocks/cert.pem  \
+           -e APACHE_SSL_CERTIFICATE_KEY=/etc/letsencrypt/live/kmedia.rocks/privkey.pem \
+           -e APACHE_SSL_CERTIFICATE_CHAIN=/etc/letsencrypt/live/kmedia.rocks/chain.pem kalicki2k/alpine-apache
 ```
