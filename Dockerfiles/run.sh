@@ -1,8 +1,4 @@
 #!/bin/bash
-#
-# Purpose: Starting Apache damon...
-# Version: 1.0
-#
 
 ERROR=/error
 HTDOCS=/htdocs
@@ -11,7 +7,6 @@ SERVER_ROOT=/var/www/localhost
 TEMPLATE_ROOT=/var/www/skel
 
 DIRECTORIES=(/cgi-bin ${HTDOCS} /logs ${ERROR})
-
 
 #
 # Checks if required folder exists. If not, it will be created.
@@ -51,7 +46,7 @@ function set_server_name {
     fi
 }
 
-function set_user_group {
+function set_user_and_group {
     if [ ! -z ${APACHE_RUN_USER} ]; then
 
          if [ -z ${APACHE_RUN_GROUP} ]; then
@@ -76,6 +71,20 @@ function set_user_group {
     fi
 }
 
+function set_ssl {
+    if [[ -n ${APACHE_SSL_CERTIFICATE} && -n ${APACHE_SSL_CERTIFICATE_KEY} && -n ${APACHE_SSL_CERTIFICATE_CHAIN} ]] ; then
+        sed -i -e "s/SSLCertificateChainFile .*/SSLCertificateChainFile ${APACHE_SSL_CERTIFICATE_CHAIN//\//\\/}/" -e "s/#SSLCertificateChainFile/SSLCertificateChainFile/" ${APACHE_ROOT}/conf.d/ssl.conf
+        echo "Set SSLCertificateChainFile to ${APACHE_SSL_CERTIFICATE_CHAIN}"
+    fi
+
+    if [[ -n ${APACHE_SSL_CERTIFICATE} && -n ${APACHE_SSL_CERTIFICATE_KEY} ]] ; then
+        sed -i -e "s/SSLCertificateFile .*/SSLCertificateFile ${APACHE_SSL_CERTIFICATE//\//\\/}/" -e "s/#SSLCertificateFile/SSLCertificateFile/" ${APACHE_ROOT}/conf.d/ssl.conf
+        sed -i -e "s/SSLCertificateKeyFile .*/SSLCertificateKeyFile ${APACHE_SSL_CERTIFICATE_KEY//\//\\/}/" -e "s/#SSLCertificateKeyFile/SSLCertificateKeyFile/" ${APACHE_ROOT}/conf.d/ssl.conf
+        echo "Set SSLCertificateFile to ${APACHE_SSL_CERTIFICATE}"
+        echo "Set SSLCertificateKeyFile to ${APACHE_SSL_CERTIFICATE_KEY}"
+    fi
+}
+
 #
 # Make sure we're not confused by old, incompletely-shutdown httpd context after restarting the container.
 # httpd won't start correctly if it thinks it is already running.
@@ -96,7 +105,8 @@ create_error_pages
 create_web_page
 
 set_server_name
-set_user_group
+set_user_and_group
+set_ssl
 
 clean
 run
