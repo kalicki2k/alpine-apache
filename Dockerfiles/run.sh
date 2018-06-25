@@ -1,4 +1,15 @@
 #!/bin/bash
+#
+# Version: 1.1
+# Purpose:
+#   - Creating required directories
+#   - Creating error pages
+#   - Creating default index.html
+#   - Setting server name
+#   - Setting user and group
+#   - Setting SSL/TLS Certificate
+#   - Starting Apache damon
+#
 
 ERROR=/error
 HTDOCS=/htdocs
