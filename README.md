@@ -16,16 +16,17 @@ The image exposes a volume at `/var/www/localhost`. The structure is:
 ## Environment variables
 Various env vars can be set at runtime via your docker command or docker-compose environment section.
 
-| Name                         | Description                                          |
-| ---------------------------- | ---------------------------------------------------- |
-| APACHE_SERVER_NAME           | Server name that the server uses to identify itself. |
-| APACHE_RUN_USER              | User name to run httpd as.                           |
-| APACHE_RUN_USER_ID           | User ID to run httpd as.                             |
-| APACHE_RUN_GROUP             | Group name to run httpd as.                          |
-| APACHE_RUN_GROUP_ID          | Group ID to run httpd as.                            |
-| APACHE_SSL_CERTIFICATE       | Server Certificate...                                |
-| APACHE_SSL_CERTIFICATE_KEY   | Server Private Key...                                |
-| APACHE_SSL_CERTIFICATE_CHAIN | Server Certificate Chain...                          |
+| Name                         | Description                                                     |
+| ---------------------------- | --------------------------------------------------------------- |
+| APACHE_SERVER_NAME           | Server name that the server uses to identify itself.            |
+| APACHE_SERVER_MAIL           | Your address, where problems with the server should be e-mailed |
+| APACHE_RUN_USER              | User name to run httpd as.                                      |
+| APACHE_RUN_USER_ID           | User ID to run httpd as.                                        |
+| APACHE_RUN_GROUP             | Group name to run httpd as.                                     |
+| APACHE_RUN_GROUP_ID          | Group ID to run httpd as.                                       |
+| APACHE_SSL_CERTIFICATE       | Server Certificate...                                           |
+| APACHE_SSL_CERTIFICATE_KEY   | Server Private Key...                                           |
+| APACHE_SSL_CERTIFICATE_CHAIN | Server Certificate Chain...                                     |
 
 ## Usage
 
