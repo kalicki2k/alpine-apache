@@ -43,8 +43,8 @@ function create_error_pages {
     fi
 }
 
-function create_web_page {
-    if grep -q "It works!" ${SERVER_ROOT}${HTDOCS}/index.html; then
+function create_default_page {
+    if [ -z "$(ls -A ${SERVER_ROOT}${HTDOCS})" ]; then
         cp ${TEMPLATE_ROOT}${HTDOCS}/index.html ${SERVER_ROOT}${HTDOCS}/index.html
         echo "Created default web pages.";
     fi
@@ -125,12 +125,13 @@ function clean {
 # Starting Apache daemon...
 #
 function run {
+    echo "Started Apache daemon."
     exec /usr/sbin/httpd -D FOREGROUND
 }
 
 create_directories
 create_error_pages
-create_web_page
+create_default_page
 
 set_server_name
 set_server_mail
