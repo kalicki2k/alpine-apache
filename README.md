@@ -1,5 +1,5 @@
-# Apache on Alpine Linux 3.6
-This is a micro docker images based on Alpine Linux 3.6 and Apache 2.4.
+# Apache on Alpine Linux
+This is a micro docker images based on Alpine Linux and Apache.
 
 To access site contents from outside the container you should map /var/www/localhost/htdocs.
 
