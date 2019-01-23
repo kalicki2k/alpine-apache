@@ -7,6 +7,7 @@
 #   - Creating default index.html
 #   - Setting server name
 #   - Setting server e-mail
+#   - Setting web root
 #   - Setting user and group
 #   - Setting SSL/TLS Certificate
 #   - Starting Apache damon
@@ -77,6 +78,7 @@ function set_server_mail {
 function set_web_root {
     if [[ ! -z ${APACHE_WEB_ROOT} ]]; then
         sed -i "s/\/var\/www\/localhost\/htdocs/\/var\/www\/localhost\/${APACHE_WEB_ROOT}/" ${APACHE_ROOT}/httpd.conf
+        sed -i "s/\/var\/www\/localhost\/htdocs/\/var\/www\/localhost\/${APACHE_WEB_ROOT}/" ${APACHE_ROOT}/conf.d/ssl.conf
     fi
 }
 
