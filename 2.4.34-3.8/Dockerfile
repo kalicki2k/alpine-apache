@@ -9,7 +9,7 @@ RUN apk update && apk upgrade && \
     mkdir /run/apache2/ && \
     mkdir /var/www/localhost/logs && \
     chmod +x /run.sh && \
-    rm -rf /var/www/localhost/htdocs/index.html && \
+    rm -rf /var/www/localhost/htdocs && \
     rm -rf /var/cache/apk/*
 
 WORKDIR /var/www/localhost
