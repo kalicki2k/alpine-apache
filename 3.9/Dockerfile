@@ -6,7 +6,6 @@ COPY Dockerfiles /
 
 RUN apk update && apk upgrade && \
     apk add apache2 apache2-ssl && \
-    mkdir /run/apache2/ && \
     mkdir /var/www/localhost/logs && \
     chmod +x /run.sh && \
     rm -rf /var/www/localhost/htdocs && \
