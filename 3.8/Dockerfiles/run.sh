@@ -19,18 +19,18 @@ APACHE_ROOT=/etc/apache2/
 SERVER_ROOT=/var/www/localhost
 TEMPLATE_ROOT=/var/www/skel
 
-if [[ ! -z ${APACHE_WEB_ROOT} ]]; then
-    if [[ ${APACHE_WEB_ROOT} =~ ^/ ]]; then
-        HTDOCS=${APACHE_WEB_ROOT}
-    else
-        HTDOCS=/${APACHE_WEB_ROOT}
-    fi
-fi
-
 #
 # Checks if required folder exists. If not, it will be created.
 #
 function create_directories {
+    if [[ ! -z ${APACHE_WEB_ROOT} ]]; then
+        if [[ ${APACHE_WEB_ROOT} =~ ^/ ]]; then
+            HTDOCS=${APACHE_WEB_ROOT}
+        else
+            HTDOCS=/${APACHE_WEB_ROOT}
+        fi
+    fi
+
     DIRECTORIES=(/cgi-bin ${HTDOCS} /logs ${ERROR})
 
     for DIRECTORY in ${DIRECTORIES[@]}; do
@@ -83,16 +83,18 @@ function set_server_mail {
 }
 
 function set_web_root {
+    HTDOCS_TMP=${HTDOCS}
+
     if [[ ${APACHE_WEB_ROOT} =~ ^/ ]]; then
-        HTDOCS=${APACHE_WEB_ROOT:1:${#APACHE_WEB_ROOT}}
+        HTDOCS_TMP=${APACHE_WEB_ROOT:1:${#APACHE_WEB_ROOT}}
     fi
 
-    if [[ ${HTDOCS} == *"/"* ]]; then
-        HTDOCS=${HTDOCS//\//\\/}
+    if [[ ${HTDOCS_TMP} == *"/"* ]]; then
+        HTDOCS_TMP=${HTDOCS_TMP//\//\\/}
     fi
 
-    sed -i "s/\/var\/www\/localhost\/htdocs/\/var\/www\/localhost\/${HTDOCS}/" ${APACHE_ROOT}/httpd.conf
-    sed -i "s/\/var\/www\/localhost\/htdocs/\/var\/www\/localhost\/${HTDOCS}/" ${APACHE_ROOT}/conf.d/ssl.conf
+    sed -i "s/\/var\/www\/localhost\/htdocs/\/var\/www\/localhost\/${HTDOCS_TMP}/" ${APACHE_ROOT}/httpd.conf
+    sed -i "s/\/var\/www\/localhost\/htdocs/\/var\/www\/localhost\/${HTDOCS_TMP}/" ${APACHE_ROOT}/conf.d/ssl.conf
 }
 
 function set_user_and_group {
@@ -104,7 +106,6 @@ function set_user_and_group {
 
         sed -i "s/User apache/User ${APACHE_RUN_USER}/" ${APACHE_ROOT}/httpd.conf
         sed -i "s/Group apache/Group ${APACHE_RUN_GROUP}/" ${APACHE_ROOT}/httpd.conf
-
 
         if [[ ! -z ${APACHE_RUN_USER_ID} ]] && [[ ! -z ${APACHE_RUN_GROUP_ID} ]]; then
             addgroup -g ${APACHE_RUN_GROUP_ID} ${APACHE_RUN_GROUP} > /dev/null 2>&1
