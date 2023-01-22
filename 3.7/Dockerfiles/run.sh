@@ -93,8 +93,10 @@ function set_web_root {
         HTDOCS_TMP=${HTDOCS_TMP//\//\\/}
     fi
 
-    sed -i "s/\/var\/www\/localhost\/htdocs/\/var\/www\/localhost\/${HTDOCS_TMP}/" ${APACHE_ROOT}/httpd.conf
-    sed -i "s/\/var\/www\/localhost\/htdocs/\/var\/www\/localhost\/${HTDOCS_TMP}/" ${APACHE_ROOT}/conf.d/ssl.conf
+    sed -i "s/\/var\/www\/localhost\/htdocs/\/var\/www\/localhost${HTDOCS_TMP}/" ${APACHE_ROOT}/httpd.conf
+    sed -i "s/\/var\/www\/localhost\/htdocs/\/var\/www\/localhost${HTDOCS_TMP}/" ${APACHE_ROOT}/conf.d/ssl.conf
+
+    echo "Set web root to ${HTDOCS}."
 }
 
 function set_user_and_group {
@@ -145,6 +147,7 @@ function set_ssl {
 #
 function clean {
     rm -rf /run/apache2/*
+    echo "Cleanup of old Apache daemon."
 }
 
 #
@@ -159,7 +162,7 @@ function run {
 #
 # Main function
 #
-function main() {
+function main {
     create_directories
     create_error_pages
     create_default_page
