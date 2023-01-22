@@ -27,7 +27,7 @@ Various env vars can be set at runtime via your docker command or docker-compose
 | APACHE_SSL_CERTIFICATE       | Server Certificate...                                           |
 | APACHE_SSL_CERTIFICATE_KEY   | Server Private Key...                                           |
 | APACHE_SSL_CERTIFICATE_CHAIN | Server Certificate Chain...                                     |
-| APACHE_WEB_ROOT              |                                                                 |
+| APACHE_WEB_ROOT              | Web root (default: /htdocs)                                     |
 
 ## Usage
 
