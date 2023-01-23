@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Version: 1.1
+# Version: 1.2
 # Purpose:
 #   - Creating required directories
 #   - Creating error pages
