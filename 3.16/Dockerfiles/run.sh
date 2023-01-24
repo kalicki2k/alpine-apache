@@ -117,11 +117,11 @@ function set_user_and_group {
             adduser -G ${APACHE_RUN_GROUP} -h ${SERVER_ROOT} ${APACHE_RUN_USER} > /dev/null 2>&1
         fi
 
-        echo "Created apache custom user and group."
+        echo "Set apache custom user and group."
     else
         APACHE_RUN_USER=apache
         APACHE_RUN_GROUP=apache
-        echo "Created apache default user and group."
+        echo "Set apache default user and group."
     fi
 
     chown -R ${APACHE_RUN_USER}:${APACHE_RUN_GROUP} ${SERVER_ROOT}${HTDOCS}
